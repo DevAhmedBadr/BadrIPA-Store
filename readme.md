@@ -219,9 +219,6 @@ In standalone mode (`navigator.standalone === true`, meaning opened from the Hom
 **Why does the mobileconfig go through VPN and Device Management?**
 That is just how iOS handles WebClip profiles. It is the same system Apple Configurator and enterprise MDM solutions use. No VPN is created, no device management actually occurs. The profile contains only the app URL, icon, and display name. You can inspect the raw XML in `trove.mobileconfig` yourself.
 
-**Can I install without the profile?**
-Yes. Open the site in Safari, tap the Share button, and choose Add to Home Screen. You lose the splash screen and full-screen mode but everything else works the same.
-
 **Why is a source not loading?**
 The CORS proxy timed out or the source is temporarily down. Tap Retry on that source. Some repos like App Testers are just slow because they have thousands of entries.
 
