@@ -99,7 +99,7 @@ SideStore is a fork of AltStore that runs entirely on-device after one initial s
 
 **What you need:** A Windows or Mac computer, a free Apple ID (a burner one is fine), a USB cable.
 
-1. Download [iLoader](https://github.com/khcrysalis/iLoader) on your computer.
+1. Download [iLoader](https://iloader.site/) on your computer.
 2. Open iLoader, tap `Add Account +` and sign in with your Apple ID.
 3. Plug your iPhone in via USB and select it under Devices.
 4. Under Installers, pick **SideStore (Stable)** and wait for it to install.
