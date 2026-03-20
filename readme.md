@@ -75,19 +75,17 @@ Every source has a trust score, a certified badge if it has been verified, and a
 
 The fastest path. No computer needed.
 
-**Step 1.** Open Safari on your iPhone. Must be Safari, not Chrome or Firefox.
+**Step 1.** Download `trove.mobileconfig` from the [latest release](https://github.com/Strykey/Trove-Store/releases/latest).
 
-**Step 2.** Go to [trovemobileapp.netlify.app](https://trovemobileapp.netlify.app).
+**Step 2.** Open the Files app, find the downloaded file and tap it. iOS will prompt you to review the profile.
 
-**Step 3.** Tap the download button for the WebClip profile.
+**Step 3.** Go to `Settings > General > VPN & Device Management`, tap **Trove** and then **Install**. Enter your passcode when prompted.
 
-**Step 4.** Go to `Settings > General > VPN & Device Management` and tap **Install**.
-
-**Step 5.** Trove appears on your Home Screen. Open it.
+**Step 4.** Trove appears on your Home Screen. Open it.
 
 Done. The app loads all sources automatically on first launch.
 
-> If Safari asks about downloading a profile, tap Allow. This is expected behavior for WebClip installation. It is the same mechanism enterprise apps and Apple Configurator use. No VPN is created. No data is collected.
+> If the profile does not appear in Settings right after tapping the file, close Settings and reopen it. It usually shows up within a few seconds.
 
 <br/>
 
