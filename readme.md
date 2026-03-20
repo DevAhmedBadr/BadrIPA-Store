@@ -50,8 +50,6 @@ No account. No subscription. No waiting. Just a very opinionated list of repos a
 </table>
 </div>
 
-> Drop your screenshots in a `screenshots/` folder at the root of the repo and they will show up here automatically.
-
 <br/>
 
 ## Sources
