@@ -36,10 +36,10 @@ No account. No subscription. No waiting. Just a very opinionated list of repos a
 <div align="center">
 <table>
 <tr>
-<td><img src="![IMG_9992](https://github.com/user-attachments/assets/5e1e2590-b2a3-48df-8986-15a3251b176f)" width="180" style="border-radius:16px"/></td>
-<td><img src="![IMG_9995](https://github.com/user-attachments/assets/00c649a6-42f6-46f9-be1a-7eac19972ae9)" width="180" style="border-radius:16px"/></td>
-<td><img src="![IMG_9993](https://github.com/user-attachments/assets/5da7fedc-8ad9-4d47-a7e6-ddfd1aabe8f9)" width="180" style="border-radius:16px"/></td>
-<td><img src="![IMG_9996](https://github.com/user-attachments/assets/438feb50-25bb-4c61-822d-dcbb681f7b73)" width="180" style="border-radius:16px"/></td>
+<td><img src="https://github.com/user-attachments/assets/5e1e2590-b2a3-48df-8986-15a3251b176f" width="180" style="border-radius:16px"/></td>
+<td><img src="https://github.com/user-attachments/assets/00c649a6-42f6-46f9-be1a-7eac19972ae9" width="180" style="border-radius:16px"/></td>
+<td><img src="https://github.com/user-attachments/assets/5da7fedc-8ad9-4d47-a7e6-ddfd1aabe8f9" width="180" style="border-radius:16px"/></td>
+<td><img src="https://github.com/user-attachments/assets/438feb50-25bb-4c61-822d-dcbb681f7b73" width="180" style="border-radius:16px"/></td>
 </tr>
 <tr>
 <td align="center"><sub>App List</sub></td>
