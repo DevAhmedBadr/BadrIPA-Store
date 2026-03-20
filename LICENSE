@@ -1,0 +1,91 @@
+TROVE SOURCE AVAILABLE LICENSE
+Version 1.0, March 2026
+
+Copyright (c) 2026 Strykey. All rights reserved.
+
+The source code, assets, design, and all other materials in this repository
+("the Software") are made available for viewing and personal, non-commercial
+use only under the following terms.
+
+===============================================================================
+PERMISSIONS
+===============================================================================
+
+You are permitted to:
+
+  - View the source code for personal educational or reference purposes.
+  - Deploy a private, personal, non-public instance of the Software for your
+    own use only, with no distribution to others.
+  - Submit pull requests and contributions to this repository. By doing so
+    you agree that your contributions become the property of the copyright
+    holder under this license.
+  - Fork this repository on GitHub solely for the purpose of submitting a
+    pull request back to the original repository.
+
+===============================================================================
+RESTRICTIONS
+===============================================================================
+
+You are NOT permitted to:
+
+  - Redistribute, re-upload, mirror, or publish the Software or any modified
+    version of it, in whole or in part, on any platform or by any means,
+    without explicit prior written permission from the copyright holder.
+
+  - Use the Software, its design, its branding, its name "Trove", the domain
+    "trovemobileapp.netlify.app", or any confusingly similar name or mark for
+    any commercial purpose, including but not limited to selling, licensing,
+    or monetizing the Software or any derivative work.
+
+  - Create or distribute a competing product, service, or tool that is
+    substantially derived from the Software's design, logic, or source code.
+
+  - Remove, alter, or obscure this license notice, the copyright notice, or
+    any attribution to the original author from any copy or derivative of the
+    Software.
+
+  - Sublicense the Software or any part of it to any third party.
+
+  - Use the Software or any part of it in a product or service that is
+    distributed to end users beyond personal private use.
+
+  - Claim authorship of the Software or misrepresent the origin of the
+    Software to any person.
+
+===============================================================================
+NO WARRANTY
+===============================================================================
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF,
+OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+===============================================================================
+TERMINATION
+===============================================================================
+
+Any violation of the terms above automatically and immediately terminates your
+rights under this license without notice. Upon termination you must destroy all
+copies of the Software in your possession or control.
+
+===============================================================================
+CONTACT
+===============================================================================
+
+For permission requests, commercial licensing inquiries, or any other questions
+regarding use of the Software beyond what is permitted above, contact the
+copyright holder through GitHub: https://github.com/Strykey
+
+===============================================================================
+THIRD-PARTY CONTENT
+===============================================================================
+
+This Software fetches and displays content from third-party repositories that
+are not owned by or affiliated with Strykey. The copyright holder makes no
+warranties regarding third-party content and is not responsible for its
+accuracy, legality, or availability. Use of third-party app sources is at your
+own risk and subject to the terms of each respective source.
