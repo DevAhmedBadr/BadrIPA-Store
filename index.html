@@ -242,7 +242,13 @@ html,body{background:var(--bg);color:var(--tx);font-family:-apple-system,'SF Pro
 
 <div class="toast" id="toast">Copied</div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const BADR_SUPABASE_URL = "https://vmticmbqfjzczlmnlooa.supabase.co";
+const BADR_SUPABASE_KEY = "sb_publishable_EBZfUeZXNCY3JZxksOQWVg_WhI_LPoe";
+let badrDb = null;
+let badrCatalogApps = [];
+let badrCatalogError = null;
 const PROXY = 'https://corsproxy.io/?';
 const REPOS_URL = 'https://www.jsonkeeper.com/b/ZU16J';
 const SA = window.navigator.standalone === true;
@@ -297,12 +303,12 @@ async function fetchJSON(url) {
 
 // ---- INIT ----
 async function init() {
-  // Load repos meta list
+  const badrCatalogPromise = loadBadrCatalog();
+  // Load the existing community source directory in parallel with Badr Store.
   const meta = await fetchJSON(REPOS_URL);
-  if (!meta) { showError('Failed to load sources list.'); return; }
-  REPOS_META = meta.repos;
+  REPOS_META = meta?.repos || [];
 
-  buildChips(meta.categories);
+  buildChips(meta?.categories || [{id:'all',label:'All'}]);
   document.getElementById('nav-rc').textContent = REPOS_META.length + ' sources';
 
   if (SA) {
@@ -324,7 +330,41 @@ async function init() {
   }
 
   renderSkeleton();
-  await loadAllRepos();
+  await Promise.all([loadAllRepos(), badrCatalogPromise]);
+  render();
+}
+
+async function loadBadrCatalog() {
+  try {
+    if (!window.supabase?.createClient) throw new Error('Supabase client could not be loaded.');
+    badrDb = window.supabase.createClient(BADR_SUPABASE_URL, BADR_SUPABASE_KEY, {auth:{persistSession:false,autoRefreshToken:false}});
+    const {data,error} = await badrDb.from('apps')
+      .select('id,name,slug,bundle_id,category,short_description,description,icon_path,developer_name,current_version_id,created_at,app_versions!app_versions_app_id_fkey(id,version,status,release_notes,ipa_object_path,file_size_bytes,created_at)')
+      .eq('status','published').order('created_at',{ascending:false});
+    if (error) throw error;
+    badrCatalogApps = (data || []).map(app => {
+      const versions = (app.app_versions || []).filter(v => v.status === 'ready');
+      const current = versions.find(v => v.id === app.current_version_id) || versions.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at))[0] || null;
+      let iconURL = '';
+      if (app.icon_path) {
+        iconURL = app.icon_path.startsWith('http') ? app.icon_path : badrDb.storage.from('app-icons').getPublicUrl(app.icon_path).data.publicUrl;
+      }
+      return {
+        name:app.name, subtitle:app.short_description||'', localizedDescription:app.description||'',
+        developerName:app.developer_name||'Badr Store', bundleIdentifier:app.bundle_id||'',
+        category:app.category||'Other', iconURL, version:current?.version||'',
+        versionDescription:current?.release_notes||'', size:current?.file_size_bytes||null,
+        versions:current?[{version:current.version,date:current.created_at,localizedDescription:current.release_notes||''}]:[],
+        _badrStore:true,_badrId:app.id,_ipaPath:current?.ipa_object_path||'',_repoName:'Badr Store',
+        _repoMeta:{name:'Badr Store',category:app.category||'Other',url:'',id:'badr-store'}
+      };
+    });
+    ALL_APPS.unshift(...badrCatalogApps);
+    document.getElementById('nav-rc').textContent = ALL_APPS.length + ' apps';
+  } catch (err) {
+    badrCatalogError = err?.message || String(err);
+    console.error('Badr Store catalog:', badrCatalogError);
+  }
 }
 
 async function loadAllRepos() {
@@ -363,8 +403,11 @@ function render() {
 function filteredApps() {
   let list = [...ALL_APPS];
   if (activeCategory !== 'all') {
-    // filter by matching repo category
-    list = list.filter(a => a._repoMeta && a._repoMeta.category === activeCategory);
+    list = list.filter(a => {
+      const category = a._repoMeta?.category || a.category || '';
+      const slug = String(category).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      return category === activeCategory || slug === activeCategory;
+    });
   }
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
@@ -374,6 +417,8 @@ function filteredApps() {
       (a.developerName||'').toLowerCase().includes(q) ||
       (a.localizedDescription||'').toLowerCase().includes(q) ||
       (a.bundleIdentifier||'').toLowerCase().includes(q) ||
+      (a.bundle_id||'').toLowerCase().includes(q) ||
+      (a.category||'').toLowerCase().includes(q) ||
       (a._repoName||'').toLowerCase().includes(q)
     );
   }
@@ -396,8 +441,12 @@ function renderApps() {
     // flat list when searching
     el.innerHTML = list.map((a,i) => appRowHTML(a,i)).join('');
   } else {
-    // grouped by repo
+    // Show the administrator-managed catalog first, then community sources.
     let html = '';
+    if (badrCatalogApps.length) {
+      html += '<div class="sec-hdr">Badr Store</div>';
+      html += badrCatalogApps.map((a,i) => appRowHTML(a,i)).join('');
+    }
     REPOS_DATA.filter(r => r.apps.length > 0).forEach(r => {
       html += `<div class="sec-hdr">${r.meta.name}</div>`;
       r.apps.slice(0, 30).forEach((a, i) => {
@@ -586,6 +635,10 @@ function showAppSheet(app, repoMeta) {
       </div>`;
     }).join('')}
     </div></div>`;
+  }
+
+  if (app._badrStore && app._ipaPath) {
+    html += '<div class="px"><div class="notice">IPA build uploaded to private storage. Secure download and iPhone installation delivery still needs a server-side signing / authorization endpoint.</div></div>';
   }
 
   if (perms.filter(Boolean).length) {
