@@ -4,7 +4,8 @@ This repository now includes an initial Supabase schema for the catalog, app ver
 
 ## Important architecture
 
-- The admin UI is a browser client. It must use only the Supabase project URL and anon/publishable key.
+- The admin UI and public storefront are browser clients. They must use only the Supabase project URL and anon/publishable key.
+- The storefront reads published app metadata and ready version metadata directly through the public RLS policies. IPA objects remain private.
 - Never put a Supabase service-role key, payment secret, signing private key, or Apple certificate private key in browser code or Git.
 - IPA objects are stored in the private `app-ipa` bucket. Do not make this bucket public.
 - App icons are stored in the public `app-icons` bucket.
@@ -25,7 +26,7 @@ This repository now includes an initial Supabase schema for the catalog, app ver
 
 ## Current status
 
-The existing `admin/index.html` is a local UI prototype. It is not yet connected to Supabase and does not upload IPA binaries. The schema is the first backend foundation; next implementation work is admin authentication, catalog CRUD, icon upload, IPA upload, and a server-side signed-download function.
+The public storefront (`index.html`) now reads published apps and ready versions from Supabase. The admin (`admin/index.html`) manages catalog metadata and uploads IPA builds to the private bucket. Secure IPA download delivery still requires a deployed server-side endpoint that checks authorization and issues short-lived signed URLs. Direct installation on iPhone also requires a valid Apple-supported signing/distribution method.
 
 ## Starter app catalog
 
